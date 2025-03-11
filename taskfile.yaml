@@ -1,0 +1,49 @@
+version: "3"
+
+tasks:
+  setup:
+    dir: app
+    cmds:
+      - npm ci
+  run:
+    dir: app
+    cmds:
+      - npm run dev
+  build:
+    dir: app
+    sources:
+      - src/**
+      - package**.json
+      - tsconfig.json
+      - public/**
+      - .env**
+      - index.html
+    generates:
+      - dist/**
+    cmds:
+      - task: setup
+      - task: lint
+      - task: test
+      - task: format-check
+      - npm run build
+  test:
+    dir: app
+    cmds:
+      - npm run test run
+  lint:
+    dir: app
+    cmds:
+      - npm run lint
+  format:
+    dir: app
+    cmds:
+      - npx prettier --write src
+  format-check:
+    dir: app
+    cmds:
+      - npx prettier --check src
+  clean:
+    dir: app
+    cmds:
+      - rm -rf node_modules
+      - rm -rf dist

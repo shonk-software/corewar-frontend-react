@@ -1,0 +1,163 @@
+@import "../../vars.css";
+
+#initialContentView {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#initialBigTextContainer {
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+}
+
+#initialBigTextContainer button {
+	margin-top: 25px;
+	height: 60px;
+	width: 200px;
+	align-self: flex-start;
+
+	background-color: #ff006e;
+	color: white;
+	box-shadow: 0 0 15px #ff006e;
+	transition: box-shadow 0.15s ease-in-out;
+}
+
+#initialBigTextContainer button:hover {
+	box-shadow: 0 0 40px #ff006e;
+}
+
+#initialAnimationContainer {
+	position: fixed;
+	top: 130px;
+	left: 1050px;
+	height: 600px;
+	width: 600px;
+	transform: translateY(0) scale(1) translateX(0);
+}
+
+#animationBlocker {
+	height: 600px;
+	width: 600px;
+}
+
+.fullContentView {
+	width: 100%;
+	height: calc(100dvh - var(--HEADER-HEIGHT));
+}
+
+#lastFullContentView {
+	width: 100%;
+	height: calc(100dvh - var(--HEADER-HEIGHT) - var(--FOOTER-HEIGHT));
+}
+
+#infodump0Layout {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+
+	height: 100%;
+	width: 100%;
+}
+
+.textCard {
+	background: none;
+	width: 30%;
+	line-height: 2rem;
+	margin-left: -100px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 20px;
+}
+
+.cheatSheet {
+	background: none;
+	width: 70%;
+	line-height: 2rem;
+	margin-left: -100px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	padding: 20px;
+}
+
+.textCard h2 {
+	margin-bottom: 20px;
+}
+
+.textCard button {
+	margin-top: 25px;
+}
+
+#poster {
+	width: 450px;
+	height: 600px;
+
+	background-color: red;
+}
+
+#infodump1Layout {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+
+	height: 100%;
+	width: 100%;
+}
+
+#infodump1GridItem0 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+
+	width: 100%;
+	height: 100%;
+
+	padding: 10px;
+}
+
+#infodump1GridItem1 {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 3;
+
+	width: 100%;
+	height: 100%;
+
+	padding: 10px;
+}
+
+#infodump1GridItem2 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 4;
+
+	width: 100%;
+	height: 100%;
+
+	padding: 10px;
+}
+
+#infodump1GridItem3 {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 4;
+
+	width: 100%;
+	height: 100%;
+
+	padding: 10px;
+}

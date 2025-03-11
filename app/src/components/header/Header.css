@@ -1,0 +1,60 @@
+@import "../../vars.css";
+
+#headerContainer {
+	height: var(--HEADER-HEIGHT);
+	width: 100%;
+
+	color: white;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
+
+#headerText {
+	margin-left: 100px;
+}
+
+h2 {
+	width: fit-content;
+}
+
+#player {
+	width: 200px;
+	margin-right: 30px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#playerIcon {
+	margin-right: 14px;
+}
+
+#lobbyInfoButton {
+	height: 40px;
+	border: 1px solid white;
+	border-radius: 6px;
+	padding-left: 32px;
+	padding-right: 32px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+#lobbyInfoButton:hover {
+	background-color: rgb(50, 50, 50);
+}
