@@ -10,6 +10,11 @@
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/corewar-teamprojekt/corewar">
 </p>
 
+## Whats in here?
+We recently split up our monorepo. This repo is a result of that, containing an implementation of the frontend for our
+Corewar app written in React. Ideally, you will later be able to write your own frontends or use a third party
+implementation to configure you own "Corewar-Stack".
+
 ## About Corewar
 
 [Corewar](https://en.wikipedia.org/wiki/Core_War) is a game where two or more players write competing assembly programs in a [custom assembly language called Redcode](https://github.com/corewar-teamprojekt/corewar/wiki/Redcode), aiming to control a shared virtual memory space.
@@ -24,18 +29,10 @@ The current production deployment can be found [here](https://corewar.shonk.soft
 We deploy every active branch to https://$BRANCHNAME.corewar.shonk.software/ aswell.
 
 ### Local setup
-To run the project locally, you can use our prebuilt container image.
-```bash
-docker run -p 8080:80 ghcr.io/corewar-teamprojekt/corewar:latest
-```
-
-```bash
-podman run -p 8080:80 ghcr.io/corewar-teamprojekt/corewar:latest
-```
+To run the project locally, check out our [AIO-Container repo](https://github.com/shonk-software/corewar-aio-container-build)
 
 ## Technologies
-This app uses a [react](https://react.dev/) frontend with [shadcn](https://ui.shadcn.com/) as its core component library.
-On the serverside, we run a [ktor](https://ktor.io/) backend.
+This frontend for the app uses a [react](https://react.dev/) frontend with [shadcn](https://ui.shadcn.com/) as its core component library.
 
 For more details regarding our architecture, check out [this drawio file](https://github.com/corewar-teamprojekt/corewar/blob/main/architecture.drawio).
 
