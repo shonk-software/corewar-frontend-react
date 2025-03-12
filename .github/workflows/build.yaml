@@ -1,0 +1,73 @@
+name: "Build and Test"
+on:
+  push:
+
+env:
+  IMAGE_NAME: corewar-frontend-react
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+
+jobs:
+  build-frontend:
+    name: "Build and Test Frontend"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code including submodules
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+      - name: Install dependencies
+        run: |
+          task setup
+          npm install @microsoft/eslint-formatter-sarif@3.1.0
+      - name: Run Prettier
+        run: task format-check
+      - name: Run ESLint
+        run: task lint
+      - name: Build project
+        run: task build
+      - name: Run unit tests
+        run: task test
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            app/dist
+
+  build-container-image:
+    name: "Build Container Image"
+    runs-on: ubuntu-latest
+    needs: [build-frontend]
+    steps:
+      - name: Checkout code including submodules
+        uses: actions/checkout@v4
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: ./app/dist
+      - name: Install Podman and Buildah
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman buildah
+      - name: Build image
+        run: |
+          buildah build -t ${{ env.IMAGE_NAME }}:upload -f container-build/Containerfile .
+      - name: Login Podman to ghcr.io
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | podman login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Push image
+        run: |
+          podman push ${{ env.IMAGE_NAME }}:upload ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          REF_NAME=$(echo ${{ github.ref_name }} | sed 's/\//-/g')
+          podman push ${{ env.IMAGE_NAME }}:upload ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${REF_NAME}
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            podman push ${{ env.IMAGE_NAME }}:upload ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          fi
