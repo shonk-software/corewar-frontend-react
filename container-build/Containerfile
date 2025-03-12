@@ -1,4 +1,6 @@
 FROM docker.io/nginx:stable-alpine
 COPY ./app/dist /usr/share/nginx/html
 COPY ./container-build/nginx.conf /etc/nginx/conf.d/default.conf
+COPY container-build/env.sh /docker-entrypoint.d/99-env.sh
+RUN chmod +x /docker-entrypoint.d/99-env.sh
 EXPOSE 80
